@@ -1,0 +1,20 @@
+{
+  "_description": "Open-ended interview questions for Expert Rating (ConstructionPlan §G.3). Based on InCharacter (Wang 2024) methodology. Covers all 5 Big5 dimensions.",
+  "language": "ja",
+  "questions": [
+    {"id": "Q01", "primary_dim": "E", "text": "あなたが普段、友人や家族と過ごす時間はどのようなものですか？具体的に教えてください。"},
+    {"id": "Q02", "primary_dim": "E", "text": "初対面の人が大勢いる場に行くとき、あなたはどう感じますか？"},
+    {"id": "Q03", "primary_dim": "O", "text": "何か新しいアイデアに出会ったとき、あなたはどう反応しますか？"},
+    {"id": "Q04", "primary_dim": "O", "text": "普段から興味を持っている芸術・文化・学問分野について教えてください。"},
+    {"id": "Q05", "primary_dim": "C", "text": "最近あなたが立てた計画と、それをどう実行したか教えてください。"},
+    {"id": "Q06", "primary_dim": "C", "text": "締め切りが迫っている作業があるとき、あなたはどう取り組みますか？"},
+    {"id": "Q07", "primary_dim": "A", "text": "友人や同僚と意見がぶつかったとき、あなたはどう振る舞いますか？"},
+    {"id": "Q08", "primary_dim": "A", "text": "困っている見知らぬ人を見かけたとき、あなたはどう対応することが多いですか？"},
+    {"id": "Q09", "primary_dim": "N", "text": "予定外のトラブルが発生したとき、どう感じ、どう行動しますか？"},
+    {"id": "Q10", "primary_dim": "N", "text": "眠れない夜や不安で落ち着かない時間は、最近ありましたか？それをどのように乗り越えましたか？"},
+    {"id": "Q11", "primary_dim": "E", "text": "休日に誰かから急に誘われたとき、あなたはどう反応することが多いですか？"},
+    {"id": "Q12", "primary_dim": "O", "text": "もし1週間、好きな場所に旅に出られるとしたら、どこに行き、何をしたいですか？"},
+    {"id": "Q13", "primary_dim": "C", "text": "部屋や仕事机の整理整頓について、自分ではどう評価していますか？"},
+    {"id": "Q14", "primary_dim": "A", "text": "他人から信頼されていると感じる出来事があれば教えてください。"}
+  ]
+}

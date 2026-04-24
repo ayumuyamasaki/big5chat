@@ -1,0 +1,74 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "big5chat"
+version = "0.1.0"
+description = "Big5 persona chatbot research framework (Serapio-Garcia style + 3-layer evaluation)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Big5 Chatbot Research" }]
+
+dependencies = [
+    "pydantic>=2.6",
+    "pydantic-settings>=2.2",
+    "jinja2>=3.1",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0",
+    "structlog>=24.1",
+    "httpx>=0.27",
+    # LLM SDKs
+    "openai>=1.40",
+    "anthropic>=0.34",
+    "google-genai>=0.3",
+    # Analytics
+    "numpy>=1.26",
+    "scipy>=1.12",
+    "pandas>=2.2",
+    "pingouin>=0.5.4",
+]
+
+[project.optional-dependencies]
+analysis = [
+    "factor_analyzer>=0.5",
+    "statsmodels>=0.14",
+    "matplotlib>=3.8",
+    "seaborn>=0.13",
+]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "pytest-cov>=4.1",
+    "ruff>=0.4",
+    "mypy>=1.9",
+]
+
+[project.scripts]
+big5-chat = "big5chat.cli:interactive_chat"
+big5-evaluate = "big5chat.cli:evaluate_single"
+big5-pilot = "big5chat.cli:run_pilot"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/big5chat"]
+
+[tool.hatch.build]
+include = [
+    "src/big5chat/**/*.py",
+    "src/big5chat/**/*.jinja",
+    "src/big5chat/**/*.json",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "A", "C4", "SIM", "RUF"]
+ignore = ["E501"]

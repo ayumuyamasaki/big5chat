@@ -1,0 +1,27 @@
+{
+  "_description": "English BFI-2 reduced PLACEHOLDER set for pipeline testing. Replace with the full 60-item BFI-2 (Soto & John 2017) before real experiments.",
+  "language": "en",
+  "version": "synthetic-placeholder-v0",
+  "items": [
+    {"id": "E01", "text": "I am someone who is talkative.",              "dim": "E", "reversed": false, "facet": "sociability"},
+    {"id": "E02", "text": "I am someone who tends to be quiet.",         "dim": "E", "reversed": true,  "facet": "assertiveness"},
+    {"id": "E03", "text": "I am someone who has a lot of energy.",       "dim": "E", "reversed": false, "facet": "energy_level"},
+    {"id": "E04", "text": "I am someone who prefers to stay in the background.", "dim": "E", "reversed": true, "facet": "sociability"},
+    {"id": "A01", "text": "I am someone who is compassionate.",          "dim": "A", "reversed": false, "facet": "compassion"},
+    {"id": "A02", "text": "I am someone who can be cold and uncaring.",  "dim": "A", "reversed": true,  "facet": "respectfulness"},
+    {"id": "A03", "text": "I am someone who is polite and courteous to others.", "dim": "A", "reversed": false, "facet": "respectfulness"},
+    {"id": "A04", "text": "I am someone who finds fault with others.",   "dim": "A", "reversed": true,  "facet": "trust"},
+    {"id": "C01", "text": "I am someone who keeps things neat and tidy.","dim": "C", "reversed": false, "facet": "organization"},
+    {"id": "C02", "text": "I am someone who tends to be lazy.",          "dim": "C", "reversed": true,  "facet": "productiveness"},
+    {"id": "C03", "text": "I am someone who is reliable, can always be counted on.", "dim": "C", "reversed": false, "facet": "responsibility"},
+    {"id": "C04", "text": "I am someone who has difficulty getting started on tasks.", "dim": "C", "reversed": true, "facet": "productiveness"},
+    {"id": "N01", "text": "I am someone who worries a lot.",             "dim": "N", "reversed": false, "facet": "anxiety"},
+    {"id": "N02", "text": "I am someone who is emotionally stable, not easily upset.", "dim": "N", "reversed": true, "facet": "emotional_volatility"},
+    {"id": "N03", "text": "I am someone who feels sad often.",           "dim": "N", "reversed": false, "facet": "depression"},
+    {"id": "N04", "text": "I am someone who stays calm under pressure.", "dim": "N", "reversed": true,  "facet": "anxiety"},
+    {"id": "O01", "text": "I am someone who is curious about many different things.", "dim": "O", "reversed": false, "facet": "intellectual_curiosity"},
+    {"id": "O02", "text": "I am someone who has few artistic interests.","dim": "O", "reversed": true,  "facet": "aesthetic_sensitivity"},
+    {"id": "O03", "text": "I am someone who is original, comes up with new ideas.", "dim": "O", "reversed": false, "facet": "creative_imagination"},
+    {"id": "O04", "text": "I am someone who has little creativity.",     "dim": "O", "reversed": true,  "facet": "creative_imagination"}
+  ]
+}

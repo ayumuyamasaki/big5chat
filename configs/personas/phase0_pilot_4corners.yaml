@@ -1,0 +1,37 @@
+# Minimal 4-persona pilot: all-high, all-low, and two diagonals.
+# Use this for quick smoke-test and wiring verification.
+experiment_id: phase0_pilot_4corners
+description: "Minimal 4-profile pilot for wiring verification (not statistically powered)."
+language: ja
+primary_model: openai:gpt-4.1
+judge_models:
+  - openai:gpt-4.1
+n_reps: 1
+seed_base: 42
+max_concurrency: 10
+run_bfi: true
+run_expert_rating: false
+run_trait_mcq: true
+output_dir: ./results
+log_dir: ./logs
+
+personas:
+  - profile_id: ALL_HIGH
+    big5_values: { O: 3, C: 3, E: 3, A: 3, N: 3 }
+    biographic_description_id: 0
+    language: ja
+
+  - profile_id: ALL_LOW
+    big5_values: { O: -3, C: -3, E: -3, A: -3, N: -3 }
+    biographic_description_id: 1
+    language: ja
+
+  - profile_id: HIGH_E_LOW_N
+    big5_values: { O: 2, C: 1, E: 3, A: 2, N: -3 }
+    biographic_description_id: 2
+    language: ja
+
+  - profile_id: LOW_E_HIGH_N
+    big5_values: { O: -2, C: -1, E: -3, A: -2, N: 3 }
+    biographic_description_id: 3
+    language: ja

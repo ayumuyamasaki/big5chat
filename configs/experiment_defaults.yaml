@@ -1,0 +1,13 @@
+# Default experiment parameters (merged with profile YAMLs).
+language: ja
+primary_model: openai:gpt-4.1
+judge_models:
+  - openai:gpt-4.1
+n_reps: 1
+seed_base: 42
+max_concurrency: 10
+run_bfi: true
+run_expert_rating: false
+run_trait_mcq: true
+output_dir: ./results
+log_dir: ./logs

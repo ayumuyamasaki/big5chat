@@ -1,0 +1,27 @@
+{
+  "_description": "Simplified Chinese BFI-2 placeholder items (20 items, synthetic). For real experiments, replace with the official Chinese BFI-2 (e.g., Zhang et al. 2022) or CBF-PI (王孟成 et al. 2011). Item template: text / dim (O|C|E|A|N) / reversed (true if low pole) / facet (optional).",
+  "language": "zh",
+  "version": "synthetic-placeholder-v0",
+  "items": [
+    {"id": "E01", "text": "我是一个健谈的人。",             "dim": "E", "reversed": false, "facet": "sociability"},
+    {"id": "E02", "text": "我通常不主动发表意见。",         "dim": "E", "reversed": true,  "facet": "assertiveness"},
+    {"id": "E03", "text": "我精力充沛、行动力强。",         "dim": "E", "reversed": false, "facet": "energy_level"},
+    {"id": "E04", "text": "我倾向于避开人多的场合。",       "dim": "E", "reversed": true,  "facet": "sociability"},
+    {"id": "A01", "text": "我会主动对他人表示关心。",       "dim": "A", "reversed": false, "facet": "compassion"},
+    {"id": "A02", "text": "我有时会对他人表现得冷淡。",     "dim": "A", "reversed": true,  "facet": "respectfulness"},
+    {"id": "A03", "text": "我对他人的感受比较敏感。",       "dim": "A", "reversed": false, "facet": "compassion"},
+    {"id": "A04", "text": "我不太容易信任他人。",           "dim": "A", "reversed": true,  "facet": "trust"},
+    {"id": "C01", "text": "我善于制定计划并按步骤完成。",   "dim": "C", "reversed": false, "facet": "organization"},
+    {"id": "C02", "text": "我有时显得比较懒散。",           "dim": "C", "reversed": true,  "facet": "organization"},
+    {"id": "C03", "text": "我是一个有责任感的人。",         "dim": "C", "reversed": false, "facet": "responsibility"},
+    {"id": "C04", "text": "我常常把事情拖延下去。",         "dim": "C", "reversed": true,  "facet": "productiveness"},
+    {"id": "N01", "text": "我经常感到焦虑。",               "dim": "N", "reversed": false, "facet": "anxiety"},
+    {"id": "N02", "text": "我的情绪波动比较小。",           "dim": "N", "reversed": true,  "facet": "emotional_volatility"},
+    {"id": "N03", "text": "我因为小事就会情绪低落。",       "dim": "N", "reversed": false, "facet": "depression"},
+    {"id": "N04", "text": "我能够较好地应对压力。",         "dim": "N", "reversed": true,  "facet": "anxiety"},
+    {"id": "O01", "text": "我喜欢思考新的想法和点子。",     "dim": "O", "reversed": false, "facet": "intellectual_curiosity"},
+    {"id": "O02", "text": "我的想象力不太丰富。",           "dim": "O", "reversed": true,  "facet": "creative_imagination"},
+    {"id": "O03", "text": "我容易被艺术和美的事物所打动。", "dim": "O", "reversed": false, "facet": "aesthetic_sensitivity"},
+    {"id": "O04", "text": "比起变化，我更偏爱稳定。",       "dim": "O", "reversed": true,  "facet": "creative_imagination"}
+  ]
+}

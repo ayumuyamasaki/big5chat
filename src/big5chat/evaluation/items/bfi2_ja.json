@@ -1,0 +1,27 @@
+{
+  "_description": "BFI-2-J items (Yoshino 2022). The 60 official items are copyrighted. This file ships a reduced SYNTHETIC PLACEHOLDER set of 20 items meant only for smoke-testing the pipeline. Replace with the full official BFI-2-J items before running real experiments. Item template: text / dim (O|C|E|A|N) / reversed (true if low pole) / facet (optional BFI-2 facet label).",
+  "language": "ja",
+  "version": "synthetic-placeholder-v0",
+  "items": [
+    {"id": "E01", "text": "私は話好きな方だ。",                         "dim": "E", "reversed": false, "facet": "sociability"},
+    {"id": "E02", "text": "私はあまり自分から発言しない。",             "dim": "E", "reversed": true,  "facet": "assertiveness"},
+    {"id": "E03", "text": "私は活発でエネルギッシュだ。",               "dim": "E", "reversed": false, "facet": "energy_level"},
+    {"id": "E04", "text": "私は人前に出るのを避けがちだ。",             "dim": "E", "reversed": true,  "facet": "sociability"},
+    {"id": "A01", "text": "私は人に親切にするよう心がけている。",       "dim": "A", "reversed": false, "facet": "compassion"},
+    {"id": "A02", "text": "私は時として他人に冷たくなることがある。",   "dim": "A", "reversed": true,  "facet": "respectfulness"},
+    {"id": "A03", "text": "私は相手の気持ちに敏感だ。",                 "dim": "A", "reversed": false, "facet": "compassion"},
+    {"id": "A04", "text": "私は他人を信用しにくい。",                   "dim": "A", "reversed": true,  "facet": "trust"},
+    {"id": "C01", "text": "私は計画を立てて物事を進めるのが得意だ。",   "dim": "C", "reversed": false, "facet": "organization"},
+    {"id": "C02", "text": "私はだらしないところがある。",               "dim": "C", "reversed": true,  "facet": "organization"},
+    {"id": "C03", "text": "私は責任感が強い方だ。",                     "dim": "C", "reversed": false, "facet": "responsibility"},
+    {"id": "C04", "text": "私は物事をすぐに先延ばしにしてしまう。",     "dim": "C", "reversed": true,  "facet": "productiveness"},
+    {"id": "N01", "text": "私はよく不安を感じる。",                     "dim": "N", "reversed": false, "facet": "anxiety"},
+    {"id": "N02", "text": "私は感情の起伏が少ない。",                   "dim": "N", "reversed": true,  "facet": "emotional_volatility"},
+    {"id": "N03", "text": "私はちょっとしたことで落ち込みやすい。",     "dim": "N", "reversed": false, "facet": "depression"},
+    {"id": "N04", "text": "私はストレスにうまく対処できる方だ。",       "dim": "N", "reversed": true,  "facet": "anxiety"},
+    {"id": "O01", "text": "私は新しいアイデアを考えるのが好きだ。",     "dim": "O", "reversed": false, "facet": "intellectual_curiosity"},
+    {"id": "O02", "text": "私はあまり想像力がない方だ。",               "dim": "O", "reversed": true,  "facet": "creative_imagination"},
+    {"id": "O03", "text": "私は芸術や美しいものに心を動かされる。",     "dim": "O", "reversed": false, "facet": "aesthetic_sensitivity"},
+    {"id": "O04", "text": "私は変化より安定を好む。",                   "dim": "O", "reversed": true,  "facet": "creative_imagination"}
+  ]
+}

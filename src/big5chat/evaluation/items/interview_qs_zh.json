@@ -1,0 +1,20 @@
+{
+  "_description": "Open-ended interview questions for Expert Rating (ConstructionPlan §G.3), Simplified Chinese. Based on InCharacter (Wang 2024) methodology.",
+  "language": "zh",
+  "questions": [
+    {"id": "Q01", "primary_dim": "E", "text": "你平时和朋友或家人一起度过的时光大概是什么样的？请具体说一说。"},
+    {"id": "Q02", "primary_dim": "E", "text": "当你去到一个陌生人很多的场合时，通常会有怎样的感受？"},
+    {"id": "Q03", "primary_dim": "O", "text": "遇到新的想法或新鲜事物时，你通常会有什么样的反应？"},
+    {"id": "Q04", "primary_dim": "O", "text": "请说说你平时比较感兴趣的艺术、文化或学术领域。"},
+    {"id": "Q05", "primary_dim": "C", "text": "最近你给自己制定过什么样的计划，是如何执行的？"},
+    {"id": "Q06", "primary_dim": "C", "text": "面对临近的截止日期时，你会如何安排自己的工作？"},
+    {"id": "Q07", "primary_dim": "A", "text": "当你和朋友或同事出现意见分歧时，你通常会如何处理？"},
+    {"id": "Q08", "primary_dim": "A", "text": "遇到陌生人遇到困难时，你一般会怎么反应？"},
+    {"id": "Q09", "primary_dim": "N", "text": "发生意料之外的麻烦时，你会有怎样的感受和行为？"},
+    {"id": "Q10", "primary_dim": "N", "text": "最近是否有过彻夜难眠或特别焦虑的经历？你是如何度过的？"},
+    {"id": "Q11", "primary_dim": "E", "text": "休息日如果有人临时约你出去，你通常会如何回应？"},
+    {"id": "Q12", "primary_dim": "O", "text": "如果能去任何地方旅行一周，你希望去哪里，做些什么？"},
+    {"id": "Q13", "primary_dim": "C", "text": "你如何评价自己在整理房间或工作环境方面的习惯？"},
+    {"id": "Q14", "primary_dim": "A", "text": "请举一个最近让你感到被他人信任的经历。"}
+  ]
+}
