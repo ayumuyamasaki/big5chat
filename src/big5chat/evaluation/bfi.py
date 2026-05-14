@@ -73,15 +73,34 @@ class BFIResult:
         }
 
 
-def _load_items(language: str, items_path: Path | None = None) -> list[BFIItem]:
-    if items_path is None:
-        fname = f"bfi2_{language}.json"
+def _load_items(
+    language: str,
+    items_path: Path | None = None,
+    items_filename: str | None = None,
+) -> list[BFIItem]:
+    """BFIアイテムを読み込む。
+
+    優先順位:
+    1. items_path が指定されていれば、そのPathを直接読み込む
+    2. items_filename が指定されていれば、パッケージ同梱ファイルとして読み込む
+       ("{lang}" を含む場合は language で置換、例: "bfi_{lang}.json")
+    3. どちらもNoneの場合は既存挙動 "bfi2_{lang}.json" を使用
+    """
+    if items_path is not None:
+        with open(items_path, encoding="utf-8") as f:
+            data = json.load(f)
+    else:
+        if items_filename is not None:
+            fname = (
+                items_filename.format(lang=language)
+                if "{lang}" in items_filename
+                else items_filename
+            )
+        else:
+            fname = f"bfi2_{language}.json"
         with resources.files("big5chat.evaluation.items").joinpath(fname).open(
             "r", encoding="utf-8"
         ) as f:
-            data = json.load(f)
-    else:
-        with open(items_path, encoding="utf-8") as f:
             data = json.load(f)
     return [
         BFIItem(
@@ -135,6 +154,7 @@ class BFIEvaluator:
         n_reps: int = 1,
         max_concurrency: int = 10,
         items_path: Path | None = None,
+        items_filename: str | None = None,
     ):
         self.provider = provider
         self.assembler = assembler or PromptAssembler()
@@ -143,13 +163,18 @@ class BFIEvaluator:
         self.n_reps = n_reps
         self.max_concurrency = max_concurrency
         self.items_path = items_path
+        # ファイル名テンプレート（例: "bfi_{lang}.json"）。{lang} は実行時に
+        # persona_spec.language で置換される。Noneなら既存挙動。
+        self.items_filename = items_filename
 
     async def evaluate(
         self,
         persona_spec: PersonaSpec,
         seed_base: int = 42,
     ) -> BFIResult:
-        items = _load_items(persona_spec.language, self.items_path)
+        items = _load_items(
+            persona_spec.language, self.items_path, self.items_filename
+        )
         sem = asyncio.Semaphore(self.max_concurrency)
 
         tasks: list[asyncio.Task] = []

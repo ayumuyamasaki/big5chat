@@ -49,6 +49,9 @@ class ExperimentConfig(BaseModel):
     run_trait_mcq: bool = True
     output_dir: str = "./results"
     log_dir: str = "./logs"
+    # BFIアイテムファイル名テンプレート。"{lang}" を含む場合は実行時に
+    # 各ペルソナの言語で置換される。Noneなら既存の bfi2_{lang}.json を使用。
+    bfi_items_filename: str | None = None
 
     @classmethod
     def from_yaml(cls, path: Path | str) -> "ExperimentConfig":

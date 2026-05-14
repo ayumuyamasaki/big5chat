@@ -40,6 +40,7 @@ async def run_experiment(config: ExperimentConfig) -> dict[str, Any]:
             assembler,
             n_reps=config.n_reps,
             max_concurrency=config.max_concurrency,
+            items_filename=config.bfi_items_filename,
         )
         if config.run_bfi
         else None
