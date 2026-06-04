@@ -14,6 +14,7 @@ run_expert_rating: false
 run_trait_mcq: true
 output_dir: ./results
 log_dir: ./logs
+bfi_items_filename: "bfi_ja.json"
 
 personas:
   - profile_id: ALL_HIGH

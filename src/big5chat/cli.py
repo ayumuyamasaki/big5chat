@@ -148,7 +148,8 @@ def evaluate_single() -> None:
 async def _evaluate_single(spec: PersonaSpec, args) -> None:
     provider = get_provider(args.model)
     assembler = PromptAssembler()
-    bfi = BFIEvaluator(provider, assembler, n_reps=args.n_reps, max_concurrency=8)
+    bfi = BFIEvaluator(provider, assembler, n_reps=args.n_reps, max_concurrency=8,
+                       items_filename="bfi_ja.json")
     bfi_result = await bfi.evaluate(spec)
     payload = {
         "profile_id": spec.profile_id,
