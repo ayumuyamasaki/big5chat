@@ -103,14 +103,14 @@ def load_bfi_prompt_template(prompt_path: Path | str) -> str:
 def build_persona_description(big5: Big5Values) -> str:
     """Convert Big5Values to PersonaLLM's comma-separated persona phrase.
 
-    Rule: value > 0 -> high pole word, value < 0 -> low pole word. Zero
-    defaults to high pole for simplicity (PersonaLLM itself is binary).
+    Rule: value >= 3 (1-5 scale, 3=neutral) -> high pole word, else -> low
+    pole word. 3 defaults to high pole for simplicity (PersonaLLM itself is binary).
     """
     order = ["E", "A", "C", "N", "O"]
     words: list[str] = []
     for dim in order:
         v = getattr(big5, dim)
-        pole = 1 if v >= 0 else -1
+        pole = 1 if v >= 3 else -1
         words.append(PERSONALLM_POLES[dim][pole])
     words[-1] = "and " + words[-1]
     return ", ".join(words)

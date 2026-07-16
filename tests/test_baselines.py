@@ -74,7 +74,7 @@ def test_personallm_poles_complete():
 
 
 def test_build_persona_description_high():
-    big5 = Big5Values(O=3, C=3, E=3, A=3, N=3)
+    big5 = Big5Values(O=5, C=5, E=5, A=5, N=5)
     desc = build_persona_description(big5)
     assert "extroverted" in desc
     assert "agreeable" in desc
@@ -84,7 +84,7 @@ def test_build_persona_description_high():
 
 
 def test_build_persona_description_low():
-    big5 = Big5Values(O=-3, C=-3, E=-3, A=-3, N=-3)
+    big5 = Big5Values(O=1, C=1, E=1, A=1, N=1)
     desc = build_persona_description(big5)
     assert "introverted" in desc
     assert "antagonistic" in desc
@@ -137,7 +137,7 @@ async def test_personallm_pipeline_with_mock(mock_provider):
     )
     spec = PersonaSpec(
         profile_id="test",
-        big5_values=Big5Values(O=2, C=2, E=3, A=2, N=-2),
+        big5_values=Big5Values(O=4, C=4, E=5, A=4, N=1),
         biographic_description_id=0,
         item_postamble_id=0,
         language="en",

@@ -83,7 +83,7 @@ def mock_provider():
 def sample_spec_ja() -> PersonaSpec:
     return PersonaSpec(
         profile_id="test_highE",
-        big5_values=Big5Values(O=2, C=1, E=3, A=2, N=-2),
+        big5_values=Big5Values(O=4, C=2, E=5, A=4, N=1),
         biographic_description_id=0,
         item_postamble_id=0,
         prompt_variant="A",
@@ -95,7 +95,7 @@ def sample_spec_ja() -> PersonaSpec:
 def sample_spec_en() -> PersonaSpec:
     return PersonaSpec(
         profile_id="test_highE_en",
-        big5_values=Big5Values(O=2, C=1, E=3, A=2, N=-2),
+        big5_values=Big5Values(O=4, C=2, E=5, A=4, N=1),
         biographic_description_id=0,
         item_postamble_id=0,
         prompt_variant="A",

@@ -1,11 +1,11 @@
-# 心理学典型8型ペルソナ定義（TestPlan_8types_matrix.md 準拠）
+# 心理学典型8型ペルソナ定義（TestPlan_8types_5scale_bio20.md 準拠）
 #
 # 8型は Big5 各次元の High / Low が複数ペルソナに分散して出現するよう設計。
-# 本ファイルは language: ja のテンプレートだが、run_8types_matrix.py から
+# 本ファイルは language: ja のテンプレートだが、run_8types_matrix.py / run_8types_bio20.py から
 # 言語 (ja / en / zh) を動的に上書きして 3言語分の persona configs を生成する。
 #
-# big5_values の値域: -3 〜 +3 (Likert 9段階のうち中央7段階)
-# 期待スコア (1-5) は線形変換: expected = 3 + value * (2/3)
+# big5_values の値域: 1 〜 5 (BFI自己報告と同一の5段階、中央値3)
+# 期待スコア (1-5) は変換不要: expected = big5_value
 experiment_id: psychology_8types_ja
 description: "心理学的に意義のある典型8型ペルソナ（同テンプレートを3言語に展開）"
 language: ja
@@ -24,49 +24,49 @@ bfi_items_filename: "bfi_{lang}.json"
 
 personas:
   - profile_id: BALANCED_HIGH
-    big5_values: { O: 3, C: 3, E: 3, A: 3, N: -3 }
+    big5_values: { O: 5, C: 5, E: 5, A: 5, N: 1 }
     biographic_description_id: 0
     language: ja
     # 理想バランス型: 全特性高機能、N低（健全型）
 
   - profile_id: BALANCED_LOW
-    big5_values: { O: -3, C: -3, E: -3, A: -3, N: 3 }
+    big5_values: { O: 1, C: 1, E: 1, A: 1, N: 5 }
     biographic_description_id: 1
     language: ja
     # 平坦無関心型: 全特性低、典型的低機能対比
 
   - profile_id: EXTRAVERT_LEADER
-    big5_values: { O: 2, C: 2, E: 3, A: 1, N: -2 }
+    big5_values: { O: 4, C: 4, E: 5, A: 4, N: 2 }
     biographic_description_id: 2
     language: ja
     # 外向リーダー型: E突出、社交的指導者
 
   - profile_id: INTROVERT_THINKER
-    big5_values: { O: 3, C: 2, E: -3, A: 1, N: 0 }
+    big5_values: { O: 5, C: 4, E: 1, A: 4, N: 3 }
     biographic_description_id: 3
     language: ja
     # 内向思索家型: E低O高、内省的知識人
 
   - profile_id: NEUROTIC_ARTIST
-    big5_values: { O: 3, C: -2, E: 1, A: 1, N: 3 }
+    big5_values: { O: 5, C: 2, E: 4, A: 4, N: 5 }
     biographic_description_id: 4
     language: ja
     # 神経質芸術家型: O高N高、創造的不安定
 
   - profile_id: STABLE_OPTIMIST
-    big5_values: { O: 1, C: 2, E: 2, A: 3, N: -3 }
+    big5_values: { O: 4, C: 4, E: 4, A: 5, N: 1 }
     biographic_description_id: 5
     language: ja
     # 安定楽観型: A高N低、情緒安定
 
   - profile_id: CONSCIENTIOUS_MANAGER
-    big5_values: { O: -1, C: 3, E: -1, A: 2, N: -1 }
+    big5_values: { O: 3, C: 5, E: 2, A: 4, N: 2 }
     biographic_description_id: 6
     language: ja
     # 几帳面管理者型: C突出、秩序型
 
   - profile_id: HOSTILE_REBEL
-    big5_values: { O: 2, C: -3, E: 2, A: -3, N: 2 }
+    big5_values: { O: 4, C: 1, E: 4, A: 1, N: 4 }
     biographic_description_id: 7
     language: ja
     # 敵対反逆者型: A低C低、挑戦的

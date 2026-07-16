@@ -42,7 +42,7 @@ async def main() -> int:
     ap_args, _ = ap.parse_known_args()
     spec = PersonaSpec(
         profile_id=f"smoke_test_highE_{ap_args.language}",
-        big5_values=Big5Values(O=2, C=1, E=3, A=2, N=-2),
+        big5_values=Big5Values(O=4, C=2, E=5, A=4, N=1),
         biographic_description_id=0,
         item_postamble_id=0,
         prompt_variant="A",

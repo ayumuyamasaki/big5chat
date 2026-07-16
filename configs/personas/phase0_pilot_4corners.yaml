@@ -18,21 +18,21 @@ bfi_items_filename: "bfi_ja.json"
 
 personas:
   - profile_id: ALL_HIGH
-    big5_values: { O: 3, C: 3, E: 3, A: 3, N: 3 }
+    big5_values: { O: 5, C: 5, E: 5, A: 5, N: 5 }
     biographic_description_id: 0
     language: ja
 
   - profile_id: ALL_LOW
-    big5_values: { O: -3, C: -3, E: -3, A: -3, N: -3 }
+    big5_values: { O: 1, C: 1, E: 1, A: 1, N: 1 }
     biographic_description_id: 1
     language: ja
 
   - profile_id: HIGH_E_LOW_N
-    big5_values: { O: 2, C: 1, E: 3, A: 2, N: -3 }
+    big5_values: { O: 4, C: 3, E: 5, A: 4, N: 1 }
     biographic_description_id: 2
     language: ja
 
   - profile_id: LOW_E_HIGH_N
-    big5_values: { O: -2, C: -1, E: -3, A: -2, N: 3 }
+    big5_values: { O: 2, C: 3, E: 1, A: 2, N: 5 }
     biographic_description_id: 3
     language: ja

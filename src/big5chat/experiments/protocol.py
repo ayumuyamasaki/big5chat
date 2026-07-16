@@ -162,7 +162,7 @@ def _compute_effect_sizes(
     """For each Big5 dim, compare profiles with high vs low value on that dim.
 
     Uses BFI dim_scores as the primary outcome. A profile is 'high' on dim X
-    if its big5_values.X > 0, 'low' if < 0.
+    if its big5_values.X > 3 (1-5 scale, 3 = neutral), 'low' if < 3.
     """
     from big5chat.analysis.effect_size import effect_size_report as _esr
 
@@ -177,9 +177,9 @@ def _compute_effect_sizes(
             if score is None:
                 continue
             val = getattr(pconf.big5_values, dim)
-            if val > 0:
+            if val > 3:
                 high_scores.append(score)
-            elif val < 0:
+            elif val < 3:
                 low_scores.append(score)
         if len(high_scores) >= 2 and len(low_scores) >= 2:
             result[dim] = _esr(high_scores, low_scores)

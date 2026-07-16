@@ -2,7 +2,7 @@
 # NOTE: With full BFI + ER + TRAIT, this runs ~4000+ API calls per model.
 # Start small (--override-personas true to limit count) before scaling up.
 experiment_id: phase0_pilot_32types
-description: "All 2^5 = 32 high/low binary profiles, amplitude ±3 (Serapio-Garcia)."
+description: "All 2^5 = 32 high/low binary profiles, amplitude ±2 on a 1-5 scale (Serapio-Garcia)."
 language: ja
 primary_model: openai:gpt-4.1
 judge_models:

@@ -66,20 +66,20 @@ def load_config(path: Path | str) -> ExperimentConfig:
 
 def generate_32_profiles(
     language: str = "ja",
-    amplitude: int = 3,
+    amplitude: int = 2,
     biographies_per_profile: int = 1,
 ) -> list[PersonaConfig]:
     """Generate the 32 binary high/low profiles (PersonaLLM style).
 
-    Each dim is set to +amplitude or -amplitude, giving 2^5 = 32 configs.
-    Useful for Phase 0 pilot per ConstructionPlan §H.1.
+    Each dim is set to 3+amplitude or 3-amplitude (1-5 scale, 3=neutral),
+    giving 2^5 = 32 configs. Useful for Phase 0 pilot per ConstructionPlan §H.1.
     """
     import itertools
 
     configs: list[PersonaConfig] = []
     for idx, bits in enumerate(itertools.product([1, -1], repeat=5)):
         vals = {
-            dim: bit * amplitude
+            dim: 3 + bit * amplitude
             for dim, bit in zip(["O", "C", "E", "A", "N"], bits)
         }
         profile_id = "".join(

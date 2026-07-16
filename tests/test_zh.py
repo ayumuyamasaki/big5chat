@@ -34,23 +34,23 @@ def test_get_markers_zh():
 def test_likert_phrase_zh_positive():
     high = MARKERS_ZH["E"]["high"][:3]
     low = MARKERS_ZH["E"]["low"][:3]
-    s = likert_phrase_zh(3, high, low)
-    assert s.startswith("非常")
+    s = likert_phrase_zh(5, high, low)
+    assert s.startswith("极其")
     assert high[0] in s
 
 
 def test_likert_phrase_zh_negative():
     high = MARKERS_ZH["E"]["high"][:3]
     low = MARKERS_ZH["E"]["low"][:3]
-    s = likert_phrase_zh(-3, high, low)
-    assert s.startswith("非常")
+    s = likert_phrase_zh(1, high, low)
+    assert s.startswith("极其不")
     assert low[0] in s
 
 
 def test_chinese_intensifier():
-    assert chinese_intensifier(4) == "极其"
-    assert chinese_intensifier(-4) == "极其"
-    assert chinese_intensifier(0) == "中立"
+    assert chinese_intensifier(5) == "极其"
+    assert chinese_intensifier(1) == "极其不"
+    assert chinese_intensifier(3) == "中立"
 
 
 def test_prompt_variants_zh():
@@ -68,7 +68,7 @@ def test_postambles_zh():
 def test_persona_spec_zh_default_style():
     spec = PersonaSpec(
         profile_id="zh_test",
-        big5_values=Big5Values(O=2, C=1, E=3, A=2, N=-2),
+        big5_values=Big5Values(O=4, C=2, E=5, A=4, N=1),
         biographic_description_id=0,
         item_postamble_id=0,
         prompt_variant="A",
@@ -82,7 +82,7 @@ def test_persona_spec_zh_default_style():
 def test_assembler_zh():
     spec = PersonaSpec(
         profile_id="zh_test",
-        big5_values=Big5Values(O=2, C=1, E=3, A=2, N=-2),
+        big5_values=Big5Values(O=4, C=2, E=5, A=4, N=1),
         biographic_description_id=0,
         item_postamble_id=0,
         prompt_variant="A",
@@ -99,7 +99,7 @@ def test_assembler_zh():
 def test_persona_summary_zh():
     spec = PersonaSpec(
         profile_id="zh_test",
-        big5_values=Big5Values(O=2, C=1, E=3, A=2, N=-2),
+        big5_values=Big5Values(O=4, C=2, E=5, A=4, N=1),
         biographic_description_id=0,
         item_postamble_id=0,
         language="zh",
@@ -113,7 +113,7 @@ def test_persona_summary_zh():
 def test_reinjection_message_zh():
     spec = PersonaSpec(
         profile_id="zh_test",
-        big5_values=Big5Values(O=2, C=1, E=3, A=2, N=-2),
+        big5_values=Big5Values(O=4, C=2, E=5, A=4, N=1),
         biographic_description_id=0,
         item_postamble_id=0,
         language="zh",
@@ -127,7 +127,7 @@ def test_reinjection_message_zh():
 def test_safety_preamble_zh_high_n():
     spec = PersonaSpec(
         profile_id="zh_high_n",
-        big5_values=Big5Values(O=0, C=0, E=0, A=0, N=3),
+        big5_values=Big5Values(O=3, C=3, E=3, A=3, N=5),
         biographic_description_id=0,
         item_postamble_id=0,
         language="zh",

@@ -8,7 +8,7 @@ TestPlan_8types_matrix.md §7 に定義されたTable A〜Dを生成する。
             "persona_id": "BALANCED_HIGH",
             "model": "openai:gpt-4.1",
             "language": "ja",
-            "big5_expected": {"O": 3, "C": 3, "E": 3, "A": 3, "N": -3},
+            "big5_expected": {"O": 5, "C": 5, "E": 5, "A": 5, "N": 1},
             "big5_measured": {"O": 4.8, "C": 4.7, "E": 4.6, "A": 4.5, "N": 1.5},
         },
         ...
@@ -36,11 +36,11 @@ BIG5_DIMS = ["O", "C", "E", "A", "N"]
 
 
 def expected_score_1to5(big5_value: int) -> float:
-    """Big5プロファイル値 (-3〜+3) を1-5スケールの期待スコアに線形変換する。
+    """Big5プロファイル値 (1〜5、BFIと同一スケール) を期待スコアとしてそのまま返す。
 
-    +3 -> 5.0, 0 -> 3.0, -3 -> 1.0
+    変換不要（入力スケールと測定スケールが1-5で一致しているため）。
     """
-    return 3.0 + big5_value * (2.0 / 3.0)
+    return float(big5_value)
 
 
 def _fmt(x: float | None, fmt: str = "{:.2f}") -> str:
@@ -147,8 +147,8 @@ def compute_effect_sizes(
     for (model, lang), group in groups.items():
         per_dim: dict[str, float] = {}
         for d in BIG5_DIMS:
-            high = [r["big5_measured"][d] for r in group if r["big5_expected"][d] > 0]
-            low = [r["big5_measured"][d] for r in group if r["big5_expected"][d] < 0]
+            high = [r["big5_measured"][d] for r in group if r["big5_expected"][d] > 3]
+            low = [r["big5_measured"][d] for r in group if r["big5_expected"][d] < 3]
             per_dim[f"d_{d}"] = cohens_d(high, low) if (high and low) else float("nan")
             per_dim[f"n_high_{d}"] = float(len(high))
             per_dim[f"n_low_{d}"] = float(len(low))
@@ -336,7 +336,7 @@ def write_markdown_report(
         "",
         "- **MAE**: 5次元の |measured - expected| 平均。値が小さいほど期待値に近い。閾値目安 <= 1.0",
         "- **Cohen's d**: 高群と低群の差の標準化値。閾値目安 >= 1.0 (大効果)、>= 2.0 (理想)",
-        "- **期待スコア変換**: expected = 3 + big5_value * (2/3) （-3 → 1.0, 0 → 3.0, +3 → 5.0）",
+        "- **期待スコア変換**: expected = big5_value（入力スケールが1-5でBFI測定スケールと一致するため変換不要）",
     ]
     with open(path, "w", encoding="utf-8") as f:
         f.write("\n".join(sections))
@@ -412,3 +412,48 @@ def records_from_experiment_payloads(
                 }
             )
     return records
+
+
+def aggregate_bio20_records(
+    raw_rows: list[dict[str, Any]],
+    big5_expected_by_persona: dict[str, dict[str, int]],
+    *,
+    model: str,
+    language: str,
+) -> list[dict[str, Any]]:
+    """bio_raw形式（型 x bio_id x 次元）の生スコアから、型ごとに20bio平均した
+
+    recordsを構築する（write_full_report にそのまま渡せる形式）。
+
+    raw_rows: [{"persona_id": ..., "bio_id": ..., "O": .., "C": .., "E": .., "A": .., "N": ..}, ...]
+    """
+    by_persona: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in raw_rows:
+        by_persona[row["persona_id"]].append(row)
+
+    records: list[dict[str, Any]] = []
+    for pid, rows in by_persona.items():
+        measured: dict[str, float] = {}
+        for d in BIG5_DIMS:
+            vals = [r[d] for r in rows if r.get(d) is not None]
+            measured[d] = sum(vals) / len(vals) if vals else float("nan")
+        records.append(
+            {
+                "persona_id": pid,
+                "model": model,
+                "language": language,
+                "big5_expected": {d: big5_expected_by_persona[pid][d] for d in BIG5_DIMS},
+                "big5_measured": measured,
+            }
+        )
+    return records
+
+
+def write_bio_raw_csv(raw_rows: list[dict[str, Any]], path: Path) -> None:
+    """型 x bio_id x 次元 の生スコア一覧をCSVに出力する（個体差分析用）。"""
+    fieldnames = ["persona_id", "bio_id"] + BIG5_DIMS
+    with open(path, "w", encoding="utf-8", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=fieldnames)
+        w.writeheader()
+        for row in raw_rows:
+            w.writerow({k: row.get(k) for k in fieldnames})

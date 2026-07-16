@@ -11,34 +11,34 @@ from big5chat.persona.spec import Big5Values, PersonaSpec, StyleParams
 
 
 def test_big5_values_in_range():
-    Big5Values(O=4, C=-4, E=0, A=2, N=-1)
+    Big5Values(O=4, C=1, E=3, A=2, N=5)
     with pytest.raises(Exception):
-        Big5Values(O=5, C=0, E=0, A=0, N=0)
+        Big5Values(O=6, C=3, E=3, A=3, N=3)
     with pytest.raises(Exception):
-        Big5Values(O=-5, C=0, E=0, A=0, N=0)
+        Big5Values(O=0, C=3, E=3, A=3, N=3)
 
 
 def test_persona_hash_stability():
     spec1 = PersonaSpec(
         profile_id="p1",
-        big5_values=Big5Values(O=2, C=1, E=3, A=2, N=-2),
+        big5_values=Big5Values(O=4, C=2, E=5, A=4, N=1),
         biographic_description_id=0,
         item_postamble_id=0,
     )
     spec2 = PersonaSpec(
         profile_id="p1",
-        big5_values=Big5Values(O=2, C=1, E=3, A=2, N=-2),
+        big5_values=Big5Values(O=4, C=2, E=5, A=4, N=1),
         biographic_description_id=0,
         item_postamble_id=0,
     )
     assert spec1.profile_hash() == spec2.profile_hash()
-    spec3 = spec1.with_updates(big5_values=Big5Values(O=3, C=1, E=3, A=2, N=-2))
+    spec3 = spec1.with_updates(big5_values=Big5Values(O=5, C=2, E=5, A=4, N=1))
     assert spec1.profile_hash() != spec3.profile_hash()
 
 
 def test_ja_default_style_applied():
     spec = PersonaSpec(
-        profile_id="p", big5_values=Big5Values(O=2, C=1, E=3, A=2, N=-2),
+        profile_id="p", big5_values=Big5Values(O=4, C=2, E=5, A=4, N=1),
         biographic_description_id=0, item_postamble_id=0, language="ja",
     )
     assert spec.style is not None
@@ -48,24 +48,24 @@ def test_ja_default_style_applied():
 def test_likert_phrase_ja_positive():
     high = ["社交的な", "話好きな", "陽気な"]
     low = ["無口な", "ひかえめな", "おとなしい"]
-    s = likert_phrase_ja(3, high, low)
-    assert s.startswith("とても")
+    s = likert_phrase_ja(5, high, low)
+    assert s.startswith("非常に")
     assert "社交的な" in s
 
 
 def test_likert_phrase_ja_negative():
     high = ["社交的な", "話好きな", "陽気な"]
     low = ["無口な", "ひかえめな", "おとなしい"]
-    s = likert_phrase_ja(-3, high, low)
-    assert s.startswith("とても")
+    s = likert_phrase_ja(1, high, low)
+    assert s.startswith("全く")
     assert "無口な" in s
 
 
 def test_likert_phrase_en_positive():
     high = ["talkative", "energetic", "outgoing"]
     low = ["silent", "reserved", "quiet"]
-    s = likert_phrase_en(3, high, low)
-    assert s.startswith("very")
+    s = likert_phrase_en(5, high, low)
+    assert s.startswith("extremely")
     assert "talkative" in s
 
 

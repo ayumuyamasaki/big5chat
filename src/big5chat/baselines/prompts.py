@@ -37,12 +37,13 @@ def build_mpi_p2_prompt(big5: Big5Values) -> str:
     """Build MPI P^2-style system prompt by concatenating per-dimension descriptions.
 
     Each dimension contributes either the high-pole or low-pole description
-    based on the sign of the Big5 value. Zero defaults to high.
+    based on whether the Big5 value (1-5 scale) is above or below the
+    neutral midpoint 3. 3 defaults to high.
     """
     parts: list[str] = []
     for dim in ["E", "A", "C", "N", "O"]:
         val = getattr(big5, dim)
-        if val >= 0:
+        if val >= 3:
             parts.append(MPI_P2_HIGH[dim])
         else:
             parts.append(MPI_P2_LOW[dim])
@@ -69,7 +70,7 @@ def build_personallm_prompt(big5: Big5Values) -> str:
     """
     words: list[str] = []
     for dim in ["E", "A", "C", "N", "O"]:
-        pole = 1 if getattr(big5, dim) >= 0 else -1
+        pole = 1 if getattr(big5, dim) >= 3 else -1
         words.append(_PLLM_POLES[dim][pole])
     words[-1] = "and " + words[-1]
     phrase = ", ".join(words)

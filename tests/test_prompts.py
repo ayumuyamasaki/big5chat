@@ -51,7 +51,7 @@ def test_reinjection_message_contains_summary(sample_spec_ja):
 def test_safety_preamble_in_high_N():
     spec = PersonaSpec(
         profile_id="pN",
-        big5_values=Big5Values(O=0, C=0, E=0, A=0, N=3),
+        big5_values=Big5Values(O=3, C=3, E=3, A=3, N=5),
         biographic_description_id=0,
         item_postamble_id=0,
         language="ja",

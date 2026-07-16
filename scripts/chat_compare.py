@@ -5,15 +5,15 @@ prompts and compare responses side-by-side or one-at-a-time.
 
 Usage:
     # Single-method chat (one method at a time)
-    python scripts/chat_compare.py --big5 "O=3,C=-1,E=3,A=2,N=-2" --mode big5chat
-    python scripts/chat_compare.py --big5 "O=3,C=-1,E=3,A=2,N=-2" --mode mpi
-    python scripts/chat_compare.py --big5 "O=3,C=-1,E=3,A=2,N=-2" --mode personallm
+    python scripts/chat_compare.py --big5 "O=5,C=2,E=5,A=4,N=1" --mode big5chat
+    python scripts/chat_compare.py --big5 "O=5,C=2,E=5,A=4,N=1" --mode mpi
+    python scripts/chat_compare.py --big5 "O=5,C=2,E=5,A=4,N=1" --mode personallm
 
     # Side-by-side mode (every message goes to all three, responses shown together)
-    python scripts/chat_compare.py --big5 "O=3,C=-1,E=3,A=2,N=-2" --mode all
+    python scripts/chat_compare.py --big5 "O=5,C=2,E=5,A=4,N=1" --mode all
 
     # Show system prompts before chatting (useful for inspection)
-    python scripts/chat_compare.py --big5 "O=3,C=3,E=3,A=3,N=3" --mode all --show-prompts
+    python scripts/chat_compare.py --big5 "O=5,C=5,E=5,A=5,N=3" --mode all --show-prompts
 
 Commands during chat:
     /quit           exit
@@ -259,7 +259,7 @@ def main() -> None:
     load_dotenv()
     parser = argparse.ArgumentParser(description="Chat with a Big5 persona under each methodology.")
     parser.add_argument("--big5", type=parse_big5, required=True,
-                        help="Big5 values, e.g. 'O=3,C=-1,E=3,A=2,N=-2'")
+                        help="Big5 values, e.g. 'O=5,C=2,E=5,A=4,N=1'")
     parser.add_argument("--mode", choices=[*METHODS, "all"], default="all",
                         help="Which methodology to drive the persona. 'all' sends each message to all three.")
     parser.add_argument("--model", default=os.environ.get("BIG5_DEFAULT_MODEL", "openai:gpt-4.1"))

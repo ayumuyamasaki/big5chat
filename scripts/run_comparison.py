@@ -139,9 +139,9 @@ def compute_cohens_d_per_method(
             if score is None or score != score:  # NaN check
                 continue
             val = rec["big5_input"][dim]
-            if val > 0:
+            if val > 3:
                 high_scores.append(score)
-            elif val < 0:
+            elif val < 3:
                 low_scores.append(score)
         if len(high_scores) >= 2 and len(low_scores) >= 2:
             out[dim] = effect_size_report(high_scores, low_scores, n_boot=1000)
@@ -152,7 +152,7 @@ def compute_cohens_d_per_method(
 
 def sample_personas(n: int, language: str = "ja") -> list[PersonaSpec]:
     """Return n persona specs distributed across the 2^5 binary profile space."""
-    profiles = generate_32_profiles(language=language, amplitude=3)
+    profiles = generate_32_profiles(language=language, amplitude=2)
     if n >= len(profiles):
         return [p.to_persona_spec() for p in profiles]
     # Strided selection for balanced coverage of {+,-} per dim

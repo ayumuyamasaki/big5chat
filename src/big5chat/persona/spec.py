@@ -17,15 +17,15 @@ Language = Literal["en", "ja", "zh"]
 
 
 class Big5Values(BaseModel):
-    """Big5 profile on Likert -4 to +4 scale (9 levels)."""
+    """Big5 profile on a 1-5 scale (5 levels), matching the BFI self-report scale. 3 = neutral."""
 
     model_config = ConfigDict(frozen=True)
 
-    O: int = Field(ge=-4, le=4, description="Openness")
-    C: int = Field(ge=-4, le=4, description="Conscientiousness")
-    E: int = Field(ge=-4, le=4, description="Extraversion")
-    A: int = Field(ge=-4, le=4, description="Agreeableness")
-    N: int = Field(ge=-4, le=4, description="Neuroticism")
+    O: int = Field(ge=1, le=5, description="Openness")
+    C: int = Field(ge=1, le=5, description="Conscientiousness")
+    E: int = Field(ge=1, le=5, description="Extraversion")
+    A: int = Field(ge=1, le=5, description="Agreeableness")
+    N: int = Field(ge=1, le=5, description="Neuroticism")
 
     def as_dict(self) -> dict[str, int]:
         return {"O": self.O, "C": self.C, "E": self.E, "A": self.A, "N": self.N}
@@ -116,29 +116,29 @@ def _default_style_for(big5: Big5Values, language: Language = "ja") -> StylePara
 
 
 def _default_style_ja(big5: Big5Values) -> StyleParams:
-    # First person
-    if big5.E >= 2 and big5.A <= 0:
+    # First person（閾値は中央値3を基準に旧オフセット判定を+3した値）
+    if big5.E >= 5 and big5.A <= 3:
         first_person = "俺"
-    elif big5.E >= 2:
+    elif big5.E >= 5:
         first_person = "僕"
     else:
         first_person = "私"
 
     # Sentence ending
-    if big5.E >= 2 and big5.A >= 1:
+    # 1-5スケール（旧-2〜+2から圧縮）では「E>=3(旧オフセット)」相当の
+    # より強いカジュアル分岐は到達不能なため統合した。
+    if big5.E >= 5 and big5.A >= 4:
         sentence_ending = "混合"
-    elif big5.A <= -2:
+    elif big5.A <= 1:
         sentence_ending = "常体"
-    elif big5.E >= 3 and big5.A <= 0:
-        sentence_ending = "カジュアル"
     else:
         sentence_ending = "敬体"
 
     particle_frequency: Literal["低", "中", "高"] = (
-        "高" if big5.E >= 2 else "低" if big5.E <= -2 else "中"
+        "高" if big5.E >= 5 else "低" if big5.E <= 1 else "中"
     )
-    emoji: Literal["無", "少", "多"] = "少" if big5.E >= 2 and big5.A >= 1 else "無"
-    onomatopoeia: Literal["無", "少", "多"] = "少" if big5.O >= 2 and big5.E >= 2 else "無"
+    emoji: Literal["無", "少", "多"] = "少" if big5.E >= 5 and big5.A >= 4 else "無"
+    onomatopoeia: Literal["無", "少", "多"] = "少" if big5.O >= 5 and big5.E >= 5 else "無"
 
     return StyleParams(
         first_person=first_person,
@@ -157,26 +157,23 @@ def _default_style_zh(big5: Big5Values) -> StyleParams:
     - Particle frequency tracks use of 啊/吧/呢/嘛/哦 etc.
     """
     # First person
-    if big5.E >= 3 and big5.A <= -1:
-        first_person = "咱"
-    else:
-        first_person = "我"
+    # 1-5スケール（旧-2〜+2から圧縮）では「E>=3(旧オフセット)」相当の
+    # 咱 分岐は到達不能なため削除し、我 に統合した。
+    first_person = "我"
 
     # Sentence ending style
-    if big5.E >= 2 and big5.A >= 1:
+    if big5.E >= 5 and big5.A >= 4:
         sentence_ending = "混合"
-    elif big5.A <= -2:
+    elif big5.A <= 1:
         sentence_ending = "书面"
-    elif big5.E >= 3 and big5.A <= 0:
-        sentence_ending = "随意"
     else:
         sentence_ending = "口语"
 
     particle_frequency: Literal["低", "中", "高"] = (
-        "高" if big5.E >= 2 else "低" if big5.E <= -2 else "中"
+        "高" if big5.E >= 5 else "低" if big5.E <= 1 else "中"
     )
-    emoji: Literal["無", "少", "多"] = "少" if big5.E >= 2 and big5.A >= 1 else "無"
-    onomatopoeia: Literal["無", "少", "多"] = "少" if big5.O >= 2 and big5.E >= 2 else "無"
+    emoji: Literal["無", "少", "多"] = "少" if big5.E >= 5 and big5.A >= 4 else "無"
+    onomatopoeia: Literal["無", "少", "多"] = "少" if big5.O >= 5 and big5.E >= 5 else "無"
 
     return StyleParams(
         first_person=first_person,

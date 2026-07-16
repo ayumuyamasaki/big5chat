@@ -1,83 +1,81 @@
-"""9-stage Likert modifier phrasing.
+"""5-stage Likert modifier phrasing (1-5 scale, matching BFI). 3 = neutral.
 
-ConstructionPlan.md §C.2:
-    +4: extremely  / 非常に / 极其
-    +3: very       / とても / 非常
-    +2: quite      / かなり / 相当
-    +1: a bit      / 少し   / 有点
-     0: neutral
-    -1..-4: a bit..extremely [antonym]
+    5: extremely  / 非常に / 极其
+    4: a bit      / 少し   / 有点
+    3: neutral
+    2: a bit..    / あまり.. / 有点.. [antonym]
+    1: extremely.. / 全く.. / 极其.. [antonym]
 """
 
 from __future__ import annotations
 
-# English modifiers
-LIKERT_EN_POSITIVE = {4: "extremely", 3: "very", 2: "quite", 1: "a bit"}
-LIKERT_EN_NEGATIVE = {-1: "a bit", -2: "quite", -3: "very", -4: "extremely"}
+# English modifiers (high side keyed by raw value 4/5, low side keyed by raw value 1/2)
+LIKERT_EN_POSITIVE = {5: "extremely", 4: "a bit"}
+LIKERT_EN_NEGATIVE = {2: "a bit", 1: "extremely"}
 
 # Japanese modifiers
-LIKERT_JA_POSITIVE = {4: "非常に", 3: "とても", 2: "かなり", 1: "少し"}
-LIKERT_JA_NEGATIVE = {-1: "あまり", -2: "かなり", -3: "ほとんど", -4: "まったく"}
+LIKERT_JA_POSITIVE = {5: "非常に", 4: "少し"}
+LIKERT_JA_NEGATIVE = {2: "あまり", 1: "全く"}
 
 # Chinese (Simplified) modifiers
-LIKERT_ZH_POSITIVE = {4: "极其", 3: "非常", 2: "相当", 1: "有点"}
-LIKERT_ZH_NEGATIVE = {-1: "有点", -2: "相当", -3: "非常", -4: "极其"}
+LIKERT_ZH_POSITIVE = {5: "极其", 4: "有点"}
+LIKERT_ZH_NEGATIVE = {2: "不太", 1: "极其不"}
 
 
 def likert_phrase_en(value: int, high_markers: list[str], low_markers: list[str]) -> str:
     """Return an English phrase like 'very talkative, energetic, outgoing, ...'."""
-    if value > 0:
+    if value > 3:
         mod = LIKERT_EN_POSITIVE[value]
         return f"{mod} {', '.join(high_markers)}"
-    if value < 0:
-        mod = LIKERT_EN_POSITIVE[-value]
+    if value < 3:
+        mod = LIKERT_EN_NEGATIVE[value]
         return f"{mod} {', '.join(low_markers)}"
     return f"neither particularly {high_markers[0]} nor {low_markers[0]}"
 
 
 def likert_phrase_ja(value: int, high_markers: list[str], low_markers: list[str]) -> str:
     """Return a Japanese phrase like 'とても社交的で、話好きで、陽気な'."""
-    if value > 0:
+    if value > 3:
         mod = LIKERT_JA_POSITIVE[value]
         return mod + "、".join(high_markers)
-    if value < 0:
-        mod = LIKERT_JA_POSITIVE[-value]
+    if value < 3:
+        mod = LIKERT_JA_NEGATIVE[value]
         return mod + "、".join(low_markers)
     return f"{high_markers[0]}でも{low_markers[0]}でもない"
 
 
 def likert_phrase_zh(value: int, high_markers: list[str], low_markers: list[str]) -> str:
     """Return a Chinese phrase like '非常外向的、健谈的、活跃的'."""
-    if value > 0:
+    if value > 3:
         mod = LIKERT_ZH_POSITIVE[value]
         return mod + "、".join(high_markers)
-    if value < 0:
-        mod = LIKERT_ZH_POSITIVE[-value]
+    if value < 3:
+        mod = LIKERT_ZH_NEGATIVE[value]
         return mod + "、".join(low_markers)
     return f"既不{high_markers[0]}也不{low_markers[0]}"
 
 
 def english_intensifier(value: int) -> str:
-    if value > 0:
+    if value > 3:
         return LIKERT_EN_POSITIVE[value]
-    if value < 0:
-        return LIKERT_EN_POSITIVE[-value]
+    if value < 3:
+        return LIKERT_EN_NEGATIVE[value]
     return "neither"
 
 
 def japanese_intensifier(value: int) -> str:
-    if value > 0:
+    if value > 3:
         return LIKERT_JA_POSITIVE[value]
-    if value < 0:
-        return LIKERT_JA_POSITIVE[-value]
+    if value < 3:
+        return LIKERT_JA_NEGATIVE[value]
     return "どちらでもない"
 
 
 def chinese_intensifier(value: int) -> str:
-    if value > 0:
+    if value > 3:
         return LIKERT_ZH_POSITIVE[value]
-    if value < 0:
-        return LIKERT_ZH_POSITIVE[-value]
+    if value < 3:
+        return LIKERT_ZH_NEGATIVE[value]
     return "中立"
 
 
